@@ -1,19 +1,37 @@
 """ 
 This project is about University system using OOP concept 
 """
-class University:
-    def __init__(self, name):
-        self.name = name
+from abc import ABC, abstractclassmethod
+class Person(ABC):
+    def __init__(self, first_name, last_name, age, email, role):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+        self.email = email
+        self.role = role
         
-    # geter and seters
-    def getName(self):
-        return self.name
+        
+    def display_info(self):
+        pass
     
-    def setName(self, newName):
-        self.name = newName
+class Student(Person):
+    def __init__(self, student_id, gpa, courses):
+        self.student_id = student_id
+        self.gpa = gpa
+        self.courses = []
+        
+    def enrole(self, course):
+        self.courses.append(course)
+        print("course enroled")
     
-    def __str__(self):
-        return f"The University Name is: {self.name}"
+    def calculate_gpa(self):
+        pass
+    
+    def display_info(self):
+        pass
+        
+        
+        
 
         
     
