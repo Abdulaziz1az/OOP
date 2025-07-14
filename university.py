@@ -40,4 +40,19 @@ class Student(Person):
 
     def display_info(self):
         print(f" First Name:{self.first_name}\n Last Name: {self.last_name}\n Age: {self.age}\n Eamil: {self.email}\n Role: {self.role}\n Student ID: {self.student_id}\n GPA: {self.gpa}\n Course: {self.courses}".format())
+        
+# Professor class
+class Professor(Person):
+    def __init__(self, first_name, last_name, age, email, role, employee_id, department courses):
+        super().__init__(first_name, last_name, age, email, role)       
+        self.employee_id = employee_id
+        self.department = department
+        self.courses = []                                  # empty list
+        
+    def assign_course(self, course):                            
+        self.courses.append(course)                         # Adds to the list couress empty list
+        print("Course Assign.")                             # confirms it 
     
+    def display_info(self):
+        print(f" First Name:{self.first_name}\n Last Name: {self.last_name}\n Age: {self.age}\n Eamil: {self.email}\n Role: {self.role}\n Employee ID: {self.employee_id}\n Course: {self.courses}\n Department{self.department}".format())
+        
