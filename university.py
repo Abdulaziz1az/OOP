@@ -43,11 +43,11 @@ class Student(Person):
         
 # Professor class
 class Professor(Person):
-    def __init__(self, first_name, last_name, age, email, role, employee_id, department courses):
+    def __init__(self, first_name, last_name, age, email, role, employee_id, department, courses):
         super().__init__(first_name, last_name, age, email, role)       
         self.employee_id = employee_id
         self.department = department
-        self.courses = []                                  # empty list
+        self.courses = []                                   # empty list
         
     def assign_course(self, course):                            
         self.courses.append(course)                         # Adds to the list couress empty list
@@ -55,4 +55,34 @@ class Professor(Person):
     
     def display_info(self):
         print(f" First Name:{self.first_name}\n Last Name: {self.last_name}\n Age: {self.age}\n Eamil: {self.email}\n Role: {self.role}\n Employee ID: {self.employee_id}\n Course: {self.courses}\n Department{self.department}".format())
+
+# Admin class
+class Admin(Person):
+    def __init__(self, first_name, last_name, age, email, role, admin_id, premissions):
+        super().__init__(first_name, last_name, age, email, role)
+        self.admin_id = admin_id
+        self.premissions = []
         
+    def add_user(self):                                     # adds the user first name to the premissions[]
+        if self.admin_id == "Abdulaziz":
+            self.premissions.append(self.first_name)
+            print("User added", self.premissions)
+        else:
+            print("Incorrect ID")
+        
+    def remove_user(self):                                   # removes the user first name to the premissions[]
+        if self.admin_id == "Abdulaziz":
+            self.premissions.remove(self.first_name)
+            print("user removed", self.premissions)
+        else:
+            print("Incorrect ID")
+            
+    def display_info(self):
+        print(f"""    First Name:{self.first_name}
+    Last Name: {self.last_name}
+    Age: {self.age}
+    Email: {self.email}
+    Role: {self.role}
+    Admin ID: {self.admin_id}
+    Premissions: {self.premissions}
+            """)
