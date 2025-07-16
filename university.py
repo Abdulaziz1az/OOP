@@ -39,7 +39,15 @@ class Student(Person):
             print("invalid") 
 
     def display_info(self):
-        print(f" First Name:{self.first_name}\n Last Name: {self.last_name}\n Age: {self.age}\n Eamil: {self.email}\n Role: {self.role}\n Student ID: {self.student_id}\n GPA: {self.gpa}\n Course: {self.courses}".format())
+        print(f"""First Name:{self.first_name}
+Last Name: {self.last_name}
+Age: {self.age}
+Email: {self.email}
+Role: {self.role}
+Student ID: {self.student_id}
+GPA: {self.gpa}
+Course: {self.courses}
+            """)
         
 # Professor class
 class Professor(Person):
@@ -54,7 +62,15 @@ class Professor(Person):
         print("Course Assign.")                             # confirms it 
     
     def display_info(self):
-        print(f" First Name:{self.first_name}\n Last Name: {self.last_name}\n Age: {self.age}\n Eamil: {self.email}\n Role: {self.role}\n Employee ID: {self.employee_id}\n Course: {self.courses}\n Department{self.department}".format())
+         print(f"""First Name:{self.first_name}
+Last Name: {self.last_name}
+Age: {self.age}
+Email: {self.email}
+Role: {self.role}
+Employee ID: {self.employee_id}
+Course: {self.courses}
+Department{self.department}
+            """)
 
 # Admin class
 class Admin(Person):
@@ -78,11 +94,29 @@ class Admin(Person):
             print("Incorrect ID")
             
     def display_info(self):
-        print(f"""    First Name:{self.first_name}
-    Last Name: {self.last_name}
-    Age: {self.age}
-    Email: {self.email}
-    Role: {self.role}
-    Admin ID: {self.admin_id}
-    Premissions: {self.premissions}
+        print(f"""First Name:{self.first_name}
+Last Name: {self.last_name}
+Age: {self.age}
+Email: {self.email}
+Role: {self.role}
+Admin ID: {self.admin_id}
+Premissions: {self.premissions}
             """)
+    
+class Course():
+    def __init__(self, course_code, course_name, enrolled_students):
+        self.course_code = course_code
+        self.course_name = course_name
+        self.enrolled_students = []
+        
+    def add_student(self, student):                     # Adds student name to the enrolled_students []
+        self.enrolled_students.append(student)
+    
+    def remove_student(self, student):                  # Removes student name from the enrolled_students []
+        self.enrolled_students.remove(student)
+
+    def display_course_info(self):                      # prints the information
+        print(f"""Course Code:{self.course_code}
+Course Name: {self.course_name}
+Enrolled Students: {self.enrolled_students}
+              """)
