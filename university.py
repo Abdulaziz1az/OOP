@@ -23,6 +23,12 @@ class Student(Person):
     def enrole(self, course):
         self.courses.append(course)
         print("course enroled")
+        
+    def view_enrolled_courses(self):
+        print(f"Current enrolled courses: {self.courses}")
+        
+    def view_gpa(self):
+        print(f"GPA: {self.gpa}")
     
     def calculate_gpa(self):
         if self.gpa == "A":
@@ -59,8 +65,13 @@ class Professor(Person):
         
     def assign_course(self, course):                            
         self.courses.append(course)                         # Adds to the list couress empty list
-        print("Course Assign.")                             # confirms it 
-    
+        print(f"Course Assign. {self.courses}")              # confirms it 
+        
+    def view_student_enrolled(self):
+        student_enrolled = []
+        for i in self.courses:
+            student_enrolled.append(self.first_name)
+            print(f"Student enrolled {self.first_name}")
     def display_info(self):
          print(f"""First Name:{self.first_name}
 Last Name: {self.last_name}
