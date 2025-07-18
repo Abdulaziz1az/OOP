@@ -1,17 +1,19 @@
 """ 
 This project is about University system using OOP concept 
 """
-class Person():
+from abc import ABC, abstractmethod
+class Person(ABC):
     def __init__(self, first_name, last_name, age, email, role):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.email = email
         self.role = role
-        
-        
+    @abstractmethod   
     def display_info(self):
-        print("info")
+        pass
+    def get_full_name(self):
+        return f"{self.role.capitalize()}: {self.first_name} {self.last_name}"
     
 class Student(Person):
     def __init__(self, first_name, last_name, age, email, role, student_id, gpa, courses):
@@ -89,6 +91,7 @@ class Admin(Person):
         super().__init__(first_name, last_name, age, email, role)
         self.admin_id = admin_id
         self.premissions = []
+        Student.all_instances.append(self)
         
     def add_user(self):                                     # adds the user first name to the premissions[]
         if self.admin_id == "Abdulaziz":
@@ -103,6 +106,8 @@ class Admin(Person):
             print("user removed", self.premissions)
         else:
             print("Incorrect ID")
+    def view_all_courses_people(cls):
+         return [(Student.first_name, Student.Courses) for student in cls.all_instances]
             
     def display_info(self):
         print(f"""First Name:{self.first_name}
