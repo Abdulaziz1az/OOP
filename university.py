@@ -20,31 +20,54 @@ class Student(Person):
         super().__init__(first_name, last_name, age, email, role)
         self.student_id = student_id
         self.gpa = gpa
-        self.courses = []
+        self.courses = {}
         
-    def enrole(self, course):
-        self.courses.append(course)
-        print("course enroled")
-        
+    def enroll(self, course):
+        if course not in self.courses:
+            self.courses[course] = None
+            print(f"{course} Successfully enrolled!")
+        else:
+            print(f"{course} is alread enrolled!")
+    
+    def update_grade(self, course, grade):
+        if course in self.courses:
+            self.courses[course] = grade
+            print(f"Grade updated: {course} -> {grade}")
+        else:
+            print(f"{course} is not enrooled yet")
     def view_enrolled_courses(self):
-        print(f"Current enrolled courses: {self.courses}")
-        
-    def view_gpa(self):
-        print(f"GPA: {self.gpa}")
+        print("Enrolled Course:")
+        for course, grade in self.courses.items():
+            grade_display = grade
+            if grade:
+                grade_display = grade
+            else:
+                print("Not graded")
+            print(f"- {course}: {grade_display}")
     
     def calculate_gpa(self):
-        if self.gpa == "A":
-            print("4")
-        elif self.gpa == "B":
-            print("3")
-        elif self.gpa == "C":
-            print("2")
-        elif self.gpa == "D":
-            print("1")
-        elif self.gpa == "F":
-            print("0")
+        points = {"A": 4, "B": 3, "C":2, "D":1, "F": 0}
+        total = 0
+        count = 0
+        for course, grade in self.courses.items():
+            if grade is None:
+                continue
+            if  grade in points:
+                total += points[grade]
+            
+        if count > 0:
+            avg = total / count
+            self.gpa = round(avg, 2)
+            print(f"GPA calculated: {self.gpa}")
         else:
-            print("invalid") 
+            print("No grades available to calculate GPA.")
+    
+        def view_gpa(self):
+            if self.gpa is not None:
+                print(f"GPA: {self.gpa}")
+            else:
+                print("GPA has not been calculated yet.")
+                
 
     def display_info(self):
         print(f"""First Name:{self.first_name}
@@ -136,3 +159,4 @@ class Course():
 Course Name: {self.course_name}
 Enrolled Students: {self.enrolled_students}
               """)
+
