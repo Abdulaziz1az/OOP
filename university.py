@@ -86,19 +86,35 @@ class Professor(Person):
         super().__init__(first_name, last_name, age, email, role)       
         self.employee_id = employee_id
         self.department = department
-        self.courses = []                                   # empty list
+        self.courses = []
         
     def assign_course(self, course):                            
-        self.courses.append(course)                         # Adds to the list couress empty list
-        print(f"Course Assign. {self.courses}")              # confirms it 
+        if course not in self.courses:
+            self.courses.append(course)
+            print(f"{course} Successfully assigned.")
+        else:
+            print(f"{course} is alread assigned.")
         
-    def view_student_enrolled(self):
-        student_enrolled = []
-        for i in self.courses:
-            student_enrolled.append(self.first_name)
-            print(f"Student enrolled {self.first_name}")
+    def view_assigned_courses(self):
+        if not self.courses:
+            print("No courses assigned yet.")
+        else:
+            print(f"Assigned Courses: {Course.course_name}")
+    
+    def view_students_in_courses(self):
+        if not self.courses:
+            print("No courses assigned yet.")
+        else:
+            for course in self.course:
+                print(f"\nCourse: {Course.course_name}") 
+                if not Course.enrolled_students:
+                    print(" No student enrolled.")
+                else:
+                    for student in Course.enrolled_students:
+                        print(f"  -{Student.get_full_name()}")   
     def display_info(self):
-         print(f"""First Name:{self.first_name}
+        Course_list = [Course.course_name for course in self.courses]
+        print(f"""First Name:{self.first_name}
 Last Name: {self.last_name}
 Age: {self.age}
 Email: {self.email}
