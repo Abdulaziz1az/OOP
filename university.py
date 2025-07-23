@@ -126,31 +126,37 @@ Department{self.department}
 
 # Admin class
 class Admin(Person):
-    def __init__(self, first_name, last_name, age, email, role, admin_id, premissions):
+    def __init__(self, first_name, last_name, age, email, role, admin_id):
         super().__init__(first_name, last_name, age, email, role)
         self.admin_id = admin_id
-        self.premissions = []
-        Student.all_instances.append(self)
+        self.premissions = ["add_user", "remove_user", "view_all"]
         
-    def add_user(self):                                     # adds the user first name to the premissions[]
-        if self.admin_id == "Abdulaziz":
-            self.premissions.append(self.first_name)
-            print("User added", self.premissions)
+    def add_user(self, user, user_registry):                                     # adds the user first name to the premissions[]
+        if self.admin_id in self.premissions:
+            user_registry.append(user)
+            print(f"User added: {user.get_full_name()}")
         else:
-            print("Incorrect ID")
+            print("Permission denied.")
         
-    def remove_user(self):                                   # removes the user first name to the premissions[]
-        if self.admin_id == "Abdulaziz":
-            self.premissions.remove(self.first_name)
-            print("user removed", self.premissions)
+    def remove_user(self, user, user_registry):                                   # removes the user first name to the premissions[]
+        if "remove_user" in self.premissions:
+            if user in user_registry:
+                user_registry.remove(user)
+                print(f"User removed: {user.get_full_name()}")
         else:
-            print("Incorrect ID")
-    def view_all_courses_people(cls):
-         return [(Student.first_name, Student.Courses) for student in cls.all_instances]
+            print("Permission denied.")
+    def view_all_courses_people(self, user_registry):
+         print("Users and their courses:")
+         for user in user_registry:
+             print(user.get_full_name())
+             if hasattr(user, "courses"):
+                 if isinstance(user.courses, dict):
+                     for course, grade in user.courses.items():
+                         print(f"- {course.course_name if hasattr (course, 'course_name') else course}")
             
     def display_info(self):
-        print(f"""First Name:{self.first_name}
-Last Name: {self.last_name}
+        print(f"""Admin info:
+Name:{self.first_name} {self.last_name}
 Age: {self.age}
 Email: {self.email}
 Role: {self.role}
