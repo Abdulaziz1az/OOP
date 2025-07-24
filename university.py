@@ -62,11 +62,11 @@ class Student(Person):
         else:
             print("No grades available to calculate GPA.")
     
-        def view_gpa(self):
-            if self.gpa is not None:
-                print(f"GPA: {self.gpa}")
-            else:
-                print("GPA has not been calculated yet.")
+    def view_gpa(self):
+        if self.gpa is not None:
+            print(f"GPA: {self.gpa}")
+        else:
+            print("GPA has not been calculated yet.")
                 
 
     def display_info(self):
@@ -82,7 +82,7 @@ Course: {self.courses}
         
 # Professor class
 class Professor(Person):
-    def __init__(self, first_name, last_name, age, email, role, employee_id, department, courses):
+    def __init__(self, first_name, last_name, age, email, role, employee_id, department):
         super().__init__(first_name, last_name, age, email, role)       
         self.employee_id = employee_id
         self.department = department
@@ -99,21 +99,22 @@ class Professor(Person):
         if not self.courses:
             print("No courses assigned yet.")
         else:
-            print(f"Assigned Courses: {Course.course_name}")
+            course1.instructore = prof1
+            print(f"Assigned Courses: {course.course_name}")
     
     def view_students_in_courses(self):
         if not self.courses:
             print("No courses assigned yet.")
         else:
-            for course in self.course:
-                print(f"\nCourse: {Course.course_name}") 
-                if not Course.enrolled_students:
+            for course in self.courses:
+                print(f"\nCourse: {course.course_name}") 
+                if not course.enrolled_students:
                     print(" No student enrolled.")
                 else:
-                    for student in Course.enrolled_students:
-                        print(f"  -{Student.get_full_name()}")   
+                    for student in course.enrolled_students:
+                        print(f"  -{student.get_full_name()}")   
     def display_info(self):
-        Course_list = [Course.course_name for course in self.courses]
+        Course_list = [course.course_name for course in self.courses]
         print(f"""First Name:{self.first_name}
 Last Name: {self.last_name}
 Age: {self.age}
@@ -165,20 +166,63 @@ Premissions: {self.premissions}
             """)
     
 class Course():
-    def __init__(self, course_code, course_name, enrolled_students):
+    def __init__(self, course_code, course_name):
         self.course_code = course_code
         self.course_name = course_name
+        self.instructor = None
         self.enrolled_students = []
         
     def add_student(self, student):                     # Adds student name to the enrolled_students []
-        self.enrolled_students.append(student)
+        if student not in self.enrolled_students:
+            self.enrolled_students.append(student)
+            print(f"{Student.get_full_name()} enrolled in {self.course_code}.")
+        else:
+            print(f"{Student.get_full_name()} is alread enrolled.")
     
     def remove_student(self, student):                  # Removes student name from the enrolled_students []
-        self.enrolled_students.remove(student)
+        if student in self.enrolled_students:
+            self.enrolled_students.remove(student)
+            print(f"{Student.get_full_name()} removed from {self.course_code}.")
+        else:
+            print(f"{Student.get_full_name()} is not enrroled in {self.course_code}")
 
     def display_course_info(self):                      # prints the information
-        print(f"""Course Code:{self.course_code}
-Course Name: {self.course_name}
-Enrolled Students: {self.enrolled_students}
-              """)
+        print(f"\nCourse Info:")
+        print(f"Code: {self.course_code}")
+        print(f"Name: {self.course_name}")
+        print(f"Instructor: {self.instructo.get_full_name()if self.instructor else 'Not assigned'}")
+        print("Enrolled Students:")
+        if not self.enrolled_students:
+            print(" None")
+        else:
+            for student in self.enrolled_students:
+                print(f"  - { Student.get_full_name()}")
+                
+prof1 = Professor("Dr.", "Ahmed", 50, "ahmed@uni.edu", "professor", "EMP101", "Computer Science")
+
+# Create course
+course1 = Course("CS101", "Introduction to Programming")
+
+# Assign course to professor
+prof1.assign_course(course1)
+
+# Check: Course's instructor should now be set
+print(f"Instructor for {course1.course_code}: {course1.instructor.get_full_name()}")
+
+# Create student
+student1 = Student("Abdulaziz", "Ali", 20, "aziz@student.edu", "student", "ST123")
+
+# Enroll student in course
+student1.enroll(course1.course_code)
+course1.add_student(student1)  # Two-way link (optional to automate later)
+
+# View course info
+course1.display_course_info()
+
+# Optionally: Show professor's assigned courses
+prof1.view_assigned_courses()
+
+# Optionally: Show students in professor's courses
+prof1.view_students_in_courses()
+            
 
