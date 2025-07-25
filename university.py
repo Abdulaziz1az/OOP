@@ -54,6 +54,7 @@ class Student(Person):
                 continue
             if  grade in points:
                 total += points[grade]
+                count += 1
             
         if count > 0:
             avg = total / count
@@ -67,11 +68,12 @@ class Student(Person):
             print(f"GPA: {self.gpa}")
         else:
             print("GPA has not been calculated yet.")
-                
+    
+
+        print(self.get_full_name)
 
     def display_info(self):
-        print(f"""First Name:{self.first_name}
-Last Name: {self.last_name}
+        print(f"""First Name:{self.get_full_name()}
 Age: {self.age}
 Email: {self.email}
 Role: {self.role}
@@ -100,7 +102,7 @@ class Professor(Person):
             print("No courses assigned yet.")
         else:
             course1.instructore = prof1
-            print(f"Assigned Courses: {course.course_name}")
+            print(f"Assigned Courses: {Course.course_name}")
     
     def view_students_in_courses(self):
         if not self.courses:
@@ -197,32 +199,3 @@ class Course():
         else:
             for student in self.enrolled_students:
                 print(f"  - { Student.get_full_name()}")
-                
-prof1 = Professor("Dr.", "Ahmed", 50, "ahmed@uni.edu", "professor", "EMP101", "Computer Science")
-
-# Create course
-course1 = Course("CS101", "Introduction to Programming")
-
-# Assign course to professor
-prof1.assign_course(course1)
-
-# Check: Course's instructor should now be set
-print(f"Instructor for {course1.course_code}: {course1.instructor.get_full_name()}")
-
-# Create student
-student1 = Student("Abdulaziz", "Ali", 20, "aziz@student.edu", "student", "ST123")
-
-# Enroll student in course
-student1.enroll(course1.course_code)
-course1.add_student(student1)  # Two-way link (optional to automate later)
-
-# View course info
-course1.display_course_info()
-
-# Optionally: Show professor's assigned courses
-prof1.view_assigned_courses()
-
-# Optionally: Show students in professor's courses
-prof1.view_students_in_courses()
-            
-
