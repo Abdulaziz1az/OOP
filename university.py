@@ -93,7 +93,7 @@ class Professor(Person):
     def assign_course(self, course):                            
         if course not in self.courses:
             self.courses.append(course)
-            print(f"{course} Successfully assigned.")
+            print(f"{course.course_code} - {course.course_name} Successfully assigned.")
         else:
             print(f"{course} is alread assigned.")
         
@@ -101,8 +101,9 @@ class Professor(Person):
         if not self.courses:
             print("No courses assigned yet.")
         else:
-            course1.instructore = prof1
-            print(f"Assigned Courses: {Course.course_name}")
+            for course in self.courses:
+                print(f"Assigned Courses:{course.course_name}")
+            
     
     def view_students_in_courses(self):
         if not self.courses:
@@ -123,7 +124,7 @@ Age: {self.age}
 Email: {self.email}
 Role: {self.role}
 Employee ID: {self.employee_id}
-Course: {self.courses}
+Course: {', '.join(Course_list) if Course_list else 'None'}
 Department{self.department}
             """)
 
@@ -187,6 +188,8 @@ class Course():
             print(f"{Student.get_full_name()} removed from {self.course_code}.")
         else:
             print(f"{Student.get_full_name()} is not enrroled in {self.course_code}")
+    def __str__(self):
+        return f"{self.course_code} - {self.course_name}"
 
     def display_course_info(self):                      # prints the information
         print(f"\nCourse Info:")
@@ -199,3 +202,9 @@ class Course():
         else:
             for student in self.enrolled_students:
                 print(f"  - { Student.get_full_name()}")
+
+p1 = Professor("Az", "Am", 22, "ad@gmail.com", "Prof", "akdj2", "MATH")
+math_c = Course("MAth", "M")
+p1.assign_course(math_c)
+c1 = Course("CS50","Intor to programing")
+p1.assign_course(c1)
