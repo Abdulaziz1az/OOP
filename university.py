@@ -70,7 +70,7 @@ class Student(Person):
             print("GPA has not been calculated yet.")
     
 
-        print(self.get_full_name)
+        print(self.get_full_name())
 
     def display_info(self):
         print(f"""First Name:{self.get_full_name()}
@@ -136,7 +136,7 @@ class Admin(Person):
         self.premissions = ["add_user", "remove_user", "view_all"]
         
     def add_user(self, user, user_registry):                                     # adds the user first name to the premissions[]
-        if self.admin_id in self.premissions:
+        if "add_user" in self.premissions:
             user_registry.append(user)
             print(f"User added: {user.get_full_name()}")
         else:
@@ -147,6 +147,8 @@ class Admin(Person):
             if user in user_registry:
                 user_registry.remove(user)
                 print(f"User removed: {user.get_full_name()}")
+            else:
+                print(f"{user.get_full_name()} not found.")
         else:
             print("Permission denied.")
     def view_all_courses_people(self, user_registry):
@@ -165,7 +167,7 @@ Age: {self.age}
 Email: {self.email}
 Role: {self.role}
 Admin ID: {self.admin_id}
-Premissions: {self.premissions}
+Premissions: {', '.join(self.premissions)}
             """)
     
 class Course():
@@ -178,16 +180,16 @@ class Course():
     def add_student(self, student):                     # Adds student name to the enrolled_students []
         if student not in self.enrolled_students:
             self.enrolled_students.append(student)
-            print(f"{Student.get_full_name()} enrolled in {self.course_code}.")
+            print(f"{student.get_full_name()} enrolled in {self.course_code}.")
         else:
-            print(f"{Student.get_full_name()} is alread enrolled.")
+            print(f"{student.get_full_name()} is alread enrolled.")
     
     def remove_student(self, student):                  # Removes student name from the enrolled_students []
         if student in self.enrolled_students:
             self.enrolled_students.remove(student)
-            print(f"{Student.get_full_name()} removed from {self.course_code}.")
+            print(f"{student.get_full_name()} removed from {self.course_code}.")
         else:
-            print(f"{Student.get_full_name()} is not enrroled in {self.course_code}")
+            print(f"{student.get_full_name()} is not enrroled in {self.course_code}")
     def __str__(self):
         return f"{self.course_code} - {self.course_name}"
 
@@ -195,16 +197,10 @@ class Course():
         print(f"\nCourse Info:")
         print(f"Code: {self.course_code}")
         print(f"Name: {self.course_name}")
-        print(f"Instructor: {self.instructo.get_full_name()if self.instructor else 'Not assigned'}")
+        print(f"Instructor: {self.instructor.get_full_name()if self.instructor else 'Not assigned'}")
         print("Enrolled Students:")
         if not self.enrolled_students:
             print(" None")
         else:
             for student in self.enrolled_students:
                 print(f"  - { Student.get_full_name()}")
-
-p1 = Professor("Az", "Am", 22, "ad@gmail.com", "Prof", "akdj2", "MATH")
-math_c = Course("MAth", "M")
-p1.assign_course(math_c)
-c1 = Course("CS50","Intor to programing")
-p1.assign_course(c1)
