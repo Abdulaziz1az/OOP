@@ -204,3 +204,44 @@ class Course():
         else:
             for student in self.enrolled_students:
                 print(f"  - { Student.get_full_name()}")
+
+
+def main():
+    admin = Admin("Abdulaziz","A",22,"Abdulaziz@gmail.com","Admin","Az12")
+    prof = Professor("Az", "Am", 45, "ahmed@uni.edu", "professor", "EMP101", "CS")
+    student = Student("Layla", "Khan", 20, "layla@student.edu", "student", "STU123", None, {})
+    course = Course("CS101", "Intro to Programming")
+    
+    while True:
+        print("\n--Welcome to the University")
+        print("1. Student")
+        print("2. Professor")
+        print("3. Admin")
+        print("4. Exit")
+        
+        choice = input("Choose an option (1-3)")
+        if choice == "1":
+            while True:
+                print("1. Enroll")
+                print("2. Update grade")
+                print("3. View enrolled courses")
+                print("4. Caculate gpa")
+                print("5. View gpa")
+                print("6. Display info")
+                print("7. Exit")
+                
+                choice = input("Choose an option (1-6)")
+                
+                if choice == "1":
+                    c1 = input("Enter the course you want enroll.")
+                    student.enroll(c1)
+                elif choice == "7":
+                    print("Have good")
+                    break
+        elif choice == "4":
+            print("Have good")
+            break
+                
+
+if __name__ == "__main__":
+    main()            
