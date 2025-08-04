@@ -209,7 +209,6 @@ class Course():
 def main():
     admin = Admin("Abdulaziz","A",22,"Abdulaziz@gmail.com","Admin","Az12")
     prof = Professor("Az", "Am", 45, "ahmed@uni.edu", "professor", "EMP101", "CS")
-    student = Student("Layla", "Khan", 20, "layla@student.edu", "student", "STU123", None, {})
     course = Course("CS101", "Intro to Programming")
     
     while True:
@@ -219,24 +218,47 @@ def main():
         print("3. Admin")
         print("4. Exit")
         
-        choice = input("Choose an option (1-3)")
+        choice = input("Choose an option (1-4)")
         if choice == "1":
             while True:
-                print("1. Enroll")
-                print("2. Update grade")
-                print("3. View enrolled courses")
-                print("4. Caculate gpa")
-                print("5. View gpa")
-                print("6. Display info")
-                print("7. Exit")
+                print("1. Student Enroled")
+                print("2. Course Enroll")
+                print("3. Update grade")
+                print("4. View enrolled courses")
+                print("5. Caculate gpa")
+                print("6. View gpa")
+                print("7. Display info")
+                print("8. Exit")
                 
-                choice = input("Choose an option (1-6)")
+                choice = input("Choose an option (1-7)")
                 
                 if choice == "1":
-                    c1 = input("Enter the course you want enroll.")
-                    student.enroll(c1)
+                    student_first_name = input("Enter student first name: ")
+                    student_last_name = input("Enter student last name:")
+                    student_age = int(input("Enter student age: "))
+                    student_email = input("Enter student email: ")
+                    student_role = input("Enter student role: ")
+                    student_id = input("Enter student id: ")
+                    student_gpa = input("Enter student gpa: ")
+                    student_course = input("Enter student course: ")
+                    student = Student(student_first_name,student_last_name,student_age,student_email, student_role,student_id,student_gpa,student_course)
+                if choice == "2":
+                    user_course = input("Enter the course you want enroll.: ")
+                    student.enroll(user_course)
+                elif choice == "3":
+                    user_course = input("Enter the course name: ")
+                    user_grade = input("Enter the  grade to update to: ")
+                    student.update_grade(user_course, user_grade)
+                elif choice == "4":
+                    student.view_enrolled_courses()
+                elif choice == "5":
+                    student.calculate_gpa()
+                elif choice == "6":
+                    student.view_gpa()
                 elif choice == "7":
-                    print("Have good")
+                    student.display_info()
+                elif choice == "8":
+                    print("Exit out of student section.")
                     break
         elif choice == "4":
             print("Have good")
