@@ -208,7 +208,6 @@ class Course():
 
 def main():
     admin = Admin("Abdulaziz","A",22,"Abdulaziz@gmail.com","Admin","Az12")
-    prof = Professor("Az", "Am", 45, "ahmed@uni.edu", "professor", "EMP101", "CS")
     course = Course("CS101", "Intro to Programming")
     
     while True:
@@ -218,7 +217,7 @@ def main():
         print("3. Admin")
         print("4. Exit")
         
-        choice = input("Choose an option (1-4)")
+        choice = input("Choose an option.")
         if choice == "1":
             while True:
                 print("1. Student Enroled")
@@ -230,8 +229,7 @@ def main():
                 print("7. Display info")
                 print("8. Exit")
                 
-                choice = input("Choose an option (1-7)")
-                
+                choice = input("Choose an option (1-8)")
                 if choice == "1":
                     student_first_name = input("Enter student first name: ")
                     student_last_name = input("Enter student last name:")
@@ -242,7 +240,8 @@ def main():
                     student_gpa = input("Enter student gpa: ")
                     student_course = input("Enter student course: ")
                     student = Student(student_first_name,student_last_name,student_age,student_email, student_role,student_id,student_gpa,student_course)
-                if choice == "2":
+                elif choice == "2":
+                    student = Student(student_first_name,student_last_name,student_age,student_email, student_role,student_id,student_gpa,student_course)
                     user_course = input("Enter the course you want enroll.: ")
                     student.enroll(user_course)
                 elif choice == "3":
@@ -258,8 +257,39 @@ def main():
                 elif choice == "7":
                     student.display_info()
                 elif choice == "8":
-                    print("Exit out of student section.")
+                    print("You exit out of the student section.")
                     break
+        elif choice == "2":
+            while True:
+                print("1. Add a professor.")
+                print("2. Assign course")
+                print("3. View assign courses")
+                print("4. View student in courses")
+                print("5 dispal information")
+                print("5. Exit")
+                prof = None
+                
+                if choice == "1":
+                    professor_first_name = input("Enter professor first name: ")
+                    professor_last_name = input("Enter professor last name:")
+                    professor_age = int(input("Enter professor age: "))
+                    professor_email = input("Enter professor email: ")
+                    professor_role = input("Enter professor role: ")
+                    employee_id = input("Enter emplyee id: ")
+                    department = input("Enter department: ")
+                    prof = Professor(professor_first_name, professor_last_name, professor_age, professor_email, professor_role, employee_id, department)
+                elif choice == "2":
+                    course_input = input("Enter course to assign: ")
+                    prof.assign_course(course_input)
+                elif choice == "3":
+                    prof.view_assigned_courses()
+                elif choice == "4":
+                    prof.view_students_in_courses()
+                elif choice == "5":
+                    prof.display_info()
+                elif choice == "6":
+                    print("You Exit the professor section.")
+                 
         elif choice == "4":
             print("Have good")
             break
