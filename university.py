@@ -93,7 +93,7 @@ class Professor(Person):
     def assign_course(self, course):                            
         if course not in self.courses:
             self.courses.append(course)
-            print(f"{course.course_code} - {course.course_name} Successfully assigned.")
+            print(f"{course.course_name} Successfully assigned.")
         else:
             print(f"{course} is alread assigned.")
         
@@ -241,9 +241,11 @@ def main():
                     student_course = input("Enter student course: ")
                     student = Student(student_first_name,student_last_name,student_age,student_email, student_role,student_id,student_gpa,student_course)
                 elif choice == "2":
-                    student = Student(student_first_name,student_last_name,student_age,student_email, student_role,student_id,student_gpa,student_course)
-                    user_course = input("Enter the course you want enroll.: ")
-                    student.enroll(user_course)
+                    if prof:
+                        user_course = input("Enter the course you want enroll.: ")
+                        student.enroll(user_course)
+                    else:
+                        print("No Student exists yet. Please creat one first(option 1).")
                 elif choice == "3":
                     user_course = input("Enter the course name: ")
                     user_grade = input("Enter the  grade to update to: ")
@@ -259,7 +261,7 @@ def main():
                 elif choice == "8":
                     print("You exit out of the student section.")
                     break
-        elif choice == "2":
+        if choice == "2":
             while True:
                 print("1. Add a professor.")
                 print("2. Assign course")
@@ -267,8 +269,7 @@ def main():
                 print("4. View student in courses")
                 print("5 dispal information")
                 print("5. Exit")
-                prof = None
-                
+                choice = input("Choose an option (1-5)")
                 if choice == "1":
                     professor_first_name = input("Enter professor first name: ")
                     professor_last_name = input("Enter professor last name:")
@@ -279,16 +280,17 @@ def main():
                     department = input("Enter department: ")
                     prof = Professor(professor_first_name, professor_last_name, professor_age, professor_email, professor_role, employee_id, department)
                 elif choice == "2":
+                    course_id = input("Enter ourse id: ")
                     course_input = input("Enter course to assign: ")
-                    prof.assign_course(course_input)
+                    course = Course(course_id,course_input)
+                    prof.assign_course(course)
                 elif choice == "3":
                     prof.view_assigned_courses()
                 elif choice == "4":
-                    prof.view_students_in_courses()
-                elif choice == "5":
                     prof.display_info()
-                elif choice == "6":
+                elif choice == "5":
                     print("You Exit the professor section.")
+                    break
                  
         elif choice == "4":
             print("Have good")
