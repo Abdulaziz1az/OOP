@@ -151,7 +151,7 @@ class Admin(Person):
                 print(f"{user.get_full_name()} not found.")
         else:
             print("Permission denied.")
-    def view_all_courses_people(self, user_registry):
+    def view_all_courses(self, user_registry):
          print("Users and their courses:")
          for user in user_registry:
              print(user.get_full_name())
@@ -291,7 +291,26 @@ def main():
                 elif choice == "5":
                     print("You Exit the professor section.")
                     break
-                 
+        if choice == "3":
+            while True:
+                print("1. Add user")
+                print("2. Remove user")
+                print("3. View all courses")
+                print("4. Display info")
+                print("5. Exit")
+                
+                choice = input("choose an option(1-5): ")
+                if choice == "1":
+                    AfirstName = input("Enter first name: ")
+                    AlastName = input("Enter last name: ")
+                    Aage = int(input("Enter your age: "))
+                    Aemail = input("Enter email: ") 
+                    Arole = input("Enter role: ")
+                    AadminId = input("Enter admin id: ")
+                    Aadmin = Admin(AfirstName, AlastName, Aage, Aemail, Arole, AadminId)
+                elif choice == "5":
+                    print("Your exit out the admin.")
+                    break
         elif choice == "4":
             print("Have good")
             break
