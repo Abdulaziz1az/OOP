@@ -293,11 +293,12 @@ def main():
                     break
         if choice == "3":
             while True:
-                print("1. Add user")
-                print("2. Remove user")
-                print("3. View all courses")
-                print("4. Display info")
-                print("5. Exit")
+                print("1. Add Admin")
+                print("2. Add user")
+                print("3. Remove user")
+                print("4. View all courses")
+                print("5. Display info")
+                print("6. Exit")
                 
                 choice = input("choose an option(1-5): ")
                 if choice == "1":
@@ -308,7 +309,20 @@ def main():
                     Arole = input("Enter role: ")
                     AadminId = input("Enter admin id: ")
                     Aadmin = Admin(AfirstName, AlastName, Aage, Aemail, Arole, AadminId)
+                elif choice == "2":
+                    user = input("Enter user: ")
+                    userRegistry = input("Enter user registry: ")
+                    admin.add_user(user, userRegistry)
+                elif choice == "3":
+                    user = input("Enter user: ")
+                    userRegistry = input("Enter user registry: ")
+                    admin.remove_user(user, userRegistry)
+                elif choice == "4":
+                    userRegistry = input("Enter user registry: ")
+                    admin.view_all_courses(userRegistry)
                 elif choice == "5":
+                    admin.display_info()
+                elif choice == "6":
                     print("Your exit out the admin.")
                     break
         elif choice == "4":
