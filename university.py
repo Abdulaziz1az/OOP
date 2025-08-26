@@ -1,9 +1,9 @@
 """ 
 This project is about University system using OOP concept 
 """
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod                                             # prent class
 class Person(ABC):
-    def __init__(self, first_name, last_name, age, email, role):
+    def __init__(self, first_name, last_name, age, email, role):            
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -15,7 +15,7 @@ class Person(ABC):
     def get_full_name(self):
         return f"{self.role.capitalize()}: {self.first_name} {self.last_name}"
     
-class Student(Person):
+class Student(Person):                                                              # child class
     def __init__(self, first_name, last_name, age, email, role, student_id, gpa, courses):
         super().__init__(first_name, last_name, age, email, role)
         self.student_id = student_id
@@ -83,7 +83,7 @@ Course: {self.courses}
             """)
         
 # Professor class
-class Professor(Person):
+class Professor(Person):                                                            # child class
     def __init__(self, first_name, last_name, age, email, role, employee_id, department):
         super().__init__(first_name, last_name, age, email, role)       
         self.employee_id = employee_id
@@ -125,11 +125,11 @@ Email: {self.email}
 Role: {self.role}
 Employee ID: {self.employee_id}
 Course: {', '.join(Course_list) if Course_list else 'None'}
-Department{self.department}
+Department: {self.department}
             """)
 
 # Admin class
-class Admin(Person):
+class Admin(Person):                                                                # child class                                  
     def __init__(self, first_name, last_name, age, email, role, admin_id):
         super().__init__(first_name, last_name, age, email, role)
         self.admin_id = admin_id
@@ -170,7 +170,7 @@ Admin ID: {self.admin_id}
 Premissions: {', '.join(self.premissions)}
             """)
     
-class Course():
+class Course():                                                                     # child class
     def __init__(self, course_code, course_name):
         self.course_code = course_code
         self.course_name = course_name
@@ -207,7 +207,6 @@ class Course():
 
 
 def main():
-    admin = Admin("Abdulaziz","A",22,"Abdulaziz@gmail.com","Admin","Az12")
     course = Course("CS101", "Intro to Programming")
     
     while True:
@@ -219,7 +218,7 @@ def main():
         
         choice = input("Choose an option.")
         if choice == "1":
-            while True:
+            while True:                     # display information for the user
                 print("1. Student Enroled")
                 print("2. Course Enroll")
                 print("3. Update grade")
@@ -229,10 +228,10 @@ def main():
                 print("7. Display info")
                 print("8. Exit")
                 
-                choice = input("Choose an option (1-8)")
-                if choice == "1":
+                choice = input("Choose an option (1-8)")                   # function of the choice
+                if choice == "1":                                          # Add a student
                     student_first_name = input("Enter student first name: ")
-                    student_last_name = input("Enter student last name:")
+                    student_last_name = input("Enter student last name: ")
                     student_age = int(input("Enter student age: "))
                     student_email = input("Enter student email: ")
                     student_role = input("Enter student role: ")
@@ -240,37 +239,37 @@ def main():
                     student_gpa = input("Enter student gpa: ")
                     student_course = input("Enter student course: ")
                     student = Student(student_first_name,student_last_name,student_age,student_email, student_role,student_id,student_gpa,student_course)
-                elif choice == "2":
-                    if prof:
+                elif choice == "2":             # course enroll
+                    if student:
                         user_course = input("Enter the course you want enroll.: ")
                         student.enroll(user_course)
                     else:
                         print("No Student exists yet. Please creat one first(option 1).")
-                elif choice == "3":
+                elif choice == "3":                                             #Update grade
                     user_course = input("Enter the course name: ")
                     user_grade = input("Enter the  grade to update to: ")
                     student.update_grade(user_course, user_grade)
-                elif choice == "4":
+                elif choice == "4":                                             #View enrolled courses
                     student.view_enrolled_courses()
                 elif choice == "5":
-                    student.calculate_gpa()
+                    student.calculate_gpa()                                    # calculate gpa
                 elif choice == "6":
-                    student.view_gpa()
+                    student.view_gpa()                                         # view gpa
                 elif choice == "7":
-                    student.display_info()
+                    student.display_info()                                      # display information
                 elif choice == "8":
                     print("You exit out of the student section.")
                     break
-        if choice == "2":
+        elif choice == "2":                                                # Professor
             while True:
-                print("1. Add a professor.")
+                print("1. Add a professor")
                 print("2. Assign course")
                 print("3. View assign courses")
                 print("4. View student in courses")
                 print("5 dispal information")
                 print("5. Exit")
                 choice = input("Choose an option (1-5)")
-                if choice == "1":
+                if choice == "1":                                                   #Add a professor
                     professor_first_name = input("Enter professor first name: ")
                     professor_last_name = input("Enter professor last name:")
                     professor_age = int(input("Enter professor age: "))
@@ -279,19 +278,21 @@ def main():
                     employee_id = input("Enter emplyee id: ")
                     department = input("Enter department: ")
                     prof = Professor(professor_first_name, professor_last_name, professor_age, professor_email, professor_role, employee_id, department)
-                elif choice == "2":
-                    course_id = input("Enter ourse id: ")
+                elif choice == "2":                                               # Assign course
+                    course_id = input("Enter course id: ")
                     course_input = input("Enter course to assign: ")
                     course = Course(course_id,course_input)
                     prof.assign_course(course)
-                elif choice == "3":
+                elif choice == "3":                                             # View assign courses
                     prof.view_assigned_courses()
-                elif choice == "4":
+                elif choice == "4":                                             # display information
                     prof.display_info()
-                elif choice == "5":
+                elif choice == "5":                                             # exit out
                     print("You Exit the professor section.")
                     break
-        if choice == "3":
+        elif choice == "3":                                   
+            user_registry = []
+            available_user = {}
             while True:
                 print("1. Add Admin")
                 print("2. Add user")
@@ -300,7 +301,7 @@ def main():
                 print("5. Display info")
                 print("6. Exit")
                 
-                choice = input("choose an option(1-5): ")
+                choice = input("choose an option(1-6): ")
                 if choice == "1":
                     AfirstName = input("Enter first name: ")
                     AlastName = input("Enter last name: ")
@@ -308,11 +309,23 @@ def main():
                     Aemail = input("Enter email: ") 
                     Arole = input("Enter role: ")
                     AadminId = input("Enter admin id: ")
-                    Aadmin = Admin(AfirstName, AlastName, Aage, Aemail, Arole, AadminId)
+                    admin = Admin(AfirstName, AlastName, Aage, Aemail, Arole, AadminId)
+                    print("Admin created!")
                 elif choice == "2":
-                    user = input("Enter user: ")
-                    userRegistry = input("Enter user registry: ")
-                    admin.add_user(user, userRegistry)
+                    if not admin:
+                        print("Please add an admin first.")
+                        continue
+                    
+                    fname = input("Enter user's fist name: ")
+                    lname = input("Enter user's last name: ")
+                    age = int(input("Enter age: "))
+                    email = input("Enter email: ")
+                    role = input("Enter role: ")
+                    sid = input("Enter student ID: ")
+                    
+                    new_student = Student(fname, lname, age, email, role, sid, None, {})
+                    available_user[sid] = new_student
+                    admin.add_user(new_student, user_registry)
                 elif choice == "3":
                     user = input("Enter user: ")
                     userRegistry = input("Enter user registry: ")
